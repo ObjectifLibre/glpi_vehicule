@@ -8,6 +8,11 @@ include_once(GLPI_ROOT."/inc/includes.php");
 function plugin_init_vehicule() {
    global $PLUGIN_HOOKS, $CFG_GLPI;
 
+   $PLUGIN_HOOKS['csrf_compliant']['vehicule'] = true;
+
+   Plugin::registerClass('PluginVehiculeVehicule');
+
+   $PLUGIN_HOOKS['menu_toadd']['vehicule'] = array('assets' => 'PluginVehiculeVehicule');
 
 }
 
@@ -15,8 +20,8 @@ function plugin_init_vehicule() {
 
 // Name and Version of the plugin
 function plugin_version_vehicule() {
-   return array('name'           => 'Example',
-                'shortname'      => 'exampl',
+   return array('name'           => 'Vehicule',
+                'shortname'      => 'vehicule',
                 'version'        => PLUGIN_VEHICULE_VERSION,
                 'license'        => 'AGPLv3+',
                 'author'         =>'',
