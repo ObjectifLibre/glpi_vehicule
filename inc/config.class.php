@@ -17,8 +17,8 @@ class PluginVehiculeConfig extends Config {
 
    static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0) {
       if ($item->getID() > 0) {
-         $pvProfile = new self();
-         $pvProfile->showForm($item->getID());
+         $pvConfig = new self();
+         $pvConfig->showForm($item->getID());
       }
       return TRUE;
    }
@@ -44,7 +44,7 @@ class PluginVehiculeConfig extends Config {
          echo "<form name='form' action=\"".Toolbox::getItemTypeFormURL('Config')."\" method='post'>";
       }
 
-      $conf = Config::getConfigurationValues('pluginvehicule');
+      $conf = Config::getConfigurationValues('plugin_vehicule');
       echo "<div class='center' id='tabsbody'>";
       echo "<table class='tab_cadre_fixe'>";
 
@@ -58,7 +58,7 @@ class PluginVehiculeConfig extends Config {
       if ($canedit) {
          echo "<tr class='tab_bg_2'>";
          echo "<td colspan='6' class='center'>";
-         echo Html::hidden('config_context', array('value' => 'pluginvehicule'));
+         echo Html::hidden('config_context', array('value' => 'plugin_vehicule'));
          echo "<input type='submit' name='update' class='submit' value=\""._sx('button', 'Save')."\">";
          echo "</td></tr>";
       }
@@ -75,14 +75,14 @@ class PluginVehiculeConfig extends Config {
     **/
    static function initConfig() {
 
-      Config::setConfigurationValues('pluginvehicule', array('test' => 1));
+      Config::setConfigurationValues('plugin_vehicule', array('test' => 1));
 
    }
 
 
 
    static function uninstallConfig() {
-      Config::deleteConfigurationValues('pluginvehicule', array('test'));
+      Config::deleteConfigurationValues('plugin_vehicule', array('test'));
    }
 }
 
