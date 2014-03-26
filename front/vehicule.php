@@ -4,7 +4,7 @@ include ('../../../inc/includes.php');
 
 Html::header("plugin vehicule titre", $_SERVER['PHP_SELF'],"assets","pluginvehiculevehicule","vehicule");
 
-//checkTypeRight('PluginExampleExample',"r");
+Session::checkRight("plugin_vehicule_vehicule", READ);
 
 Search::show('PluginVehiculeVehicule');
 

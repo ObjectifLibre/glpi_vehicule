@@ -4,6 +4,10 @@ class PluginVehiculeVehicule extends CommonDBTM {
 
    public $dohistory = TRUE;
 
+   // profile management
+   static $rightname = 'plugin_vehicule_vehicule';
+
+
    // Should return the localized name of the type
    static function getTypeName($nb = 0) {
       return 'Vehicule';
@@ -13,17 +17,18 @@ class PluginVehiculeVehicule extends CommonDBTM {
       return __('Vehicule plugin');
    }
 
-   static function canCreate() {
-      return true;
-   }
-   static function canUpdate() {
-      return true;
-   }
-
-
-   static function canView() {
-      return true;
-   }
+   // not used with new profile management
+//   static function canCreate() {
+//      return true;
+//   }
+//   static function canUpdate() {
+//      return true;
+//   }
+//
+//
+//   static function canView() {
+//      return true;
+//   }
 
    function defineTabs($options=array()){
 
@@ -38,7 +43,7 @@ class PluginVehiculeVehicule extends CommonDBTM {
 
 // pour ajouter des colones par défaut à l'install :
 // voir install/mysql/plugin_fusioninventory-empty.sql
-   
+
    function getSearchOptions() {
 
       $tab = array();

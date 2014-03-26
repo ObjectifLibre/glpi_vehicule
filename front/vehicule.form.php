@@ -3,7 +3,7 @@
 
 include ('../../../inc/includes.php');
 
-//Session::checkRight("vehicule", READ);
+Session::checkRight("plugin_vehicule_vehicule", READ);
 
 if (!isset($_GET["id"])) {
    $_GET["id"] = "";
