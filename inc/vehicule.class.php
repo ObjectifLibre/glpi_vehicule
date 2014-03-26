@@ -84,5 +84,38 @@ class PluginVehiculeVehicule extends CommonDBTM {
       return TRUE;
    }
 
+
+
+   /**
+    * Fonction pour le cron GLPI
+    *
+    * @return boolean
+    */
+   static function cronSendmail() {
+
+      if (date('d') != '01') {
+         return TRUE;
+      }
+
+      // get the bookmark
+      $bookmark = new Bookmark();
+      $bookmark->getFromDB(1);
+
+      $params = Search::manageParams($bookmark->fields['itemtype'], $bookmark->getParameters(1));
+
+      // Récupérer dans la mémoire au lieu d'afficher
+      ob_start();
+      Search::showList($bookmark->fields['itemtype'], $params);
+      $data = ob_get_contents();
+      ob_clean();
+
+      // Explose pour n'avoir que le tableau avec les données
+      $exp = explode('<table', $data);
+      echo '<table'.$exp[3];
+
+      // send mail with Notification::send(...)
+
+      return TRUE;
+   }
 }
 

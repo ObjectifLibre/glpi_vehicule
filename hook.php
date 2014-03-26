@@ -22,6 +22,10 @@ function plugin_vehicule_install() {
    PluginVehiculeProfile::initProfile();
    PluginVehiculeConfig::initConfig();
 
+   CronTask::Register('PluginVehiculeVehicule', 'sendmail', '86400',
+                      array('mode' => CronTask::MODE_EXTERNAL, 'allowmode' => 3,
+                            'logs_lifetime'=> 90));
+
 
    return TRUE;
 }
@@ -34,6 +38,7 @@ function plugin_vehicule_uninstall() {
 
    PluginVehiculeProfile::uninstallProfile();
    PluginVehiculeConfig::uninstallConfig();
+   CronTask::Unregister('Vehicule');
 
    if (TableExists("glpi_plugin_vehicule_vehicules")) {
       $query = "DROP TABLE `glpi_plugin_vehicule_vehicules`";

@@ -75,7 +75,7 @@ class PluginVehiculeConfig extends Config {
     **/
    static function initConfig() {
 
-      Config::setConfigurationValues('plugin_vehicule', array('test' => 1));
+      Config::setConfigurationValues('plugin_vehicule', array('test' => 1, 'version' => PLUGIN_VEHICULE_VERSION));
 
    }
 
