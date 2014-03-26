@@ -17,8 +17,12 @@ function plugin_vehicule_install() {
    }
 
    include_once( GLPI_ROOT . "/plugins/vehicule/inc/profile.class.php" );
+   include_once( GLPI_ROOT . "/plugins/vehicule/inc/config.class.php" );
 
    PluginVehiculeProfile::initProfile();
+   PluginVehiculeConfig::initConfig();
+
+
    return TRUE;
 }
 
@@ -29,6 +33,7 @@ function plugin_vehicule_uninstall() {
    global $DB;
 
    PluginVehiculeProfile::uninstallProfile();
+   PluginVehiculeConfig::uninstallConfig();
 
    if (TableExists("glpi_plugin_vehicule_vehicules")) {
       $query = "DROP TABLE `glpi_plugin_vehicule_vehicules`";

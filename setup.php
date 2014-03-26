@@ -12,6 +12,7 @@ function plugin_init_vehicule() {
 
    Plugin::registerClass('PluginVehiculeVehicule');
    Plugin::registerClass('PluginVehiculeProfile', array('addtabon' => 'Profile'));
+   Plugin::registerClass('PluginVehiculeConfig', array('addtabon' => 'Config'));
 
    $PLUGIN_HOOKS['menu_toadd']['vehicule'] = array('assets' => 'PluginVehiculeVehicule');
 
