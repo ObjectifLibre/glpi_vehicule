@@ -16,6 +16,9 @@ function plugin_vehicule_install() {
       $DB->query($query) or die("error creating glpi_plugin_vehicule_vehicules ". $DB->error());
    }
 
+   include_once( GLPI_ROOT . "/plugins/vehicule/inc/profile.class.php" );
+
+   PluginVehiculeProfile::initProfile();
    return TRUE;
 }
 
@@ -24,6 +27,8 @@ function plugin_vehicule_install() {
 // Uninstall process for plugin : need to return TRUE if succeeded
 function plugin_vehicule_uninstall() {
    global $DB;
+
+   PluginVehiculeProfile::uninstallProfile();
 
    if (TableExists("glpi_plugin_vehicule_vehicules")) {
       $query = "DROP TABLE `glpi_plugin_vehicule_vehicules`";

@@ -11,6 +11,7 @@ function plugin_init_vehicule() {
    $PLUGIN_HOOKS['csrf_compliant']['vehicule'] = true;
 
    Plugin::registerClass('PluginVehiculeVehicule');
+   Plugin::registerClass('PluginVehiculeProfile', array('addtabon' => 'Profile'));
 
    $PLUGIN_HOOKS['menu_toadd']['vehicule'] = array('assets' => 'PluginVehiculeVehicule');
 
