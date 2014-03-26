@@ -14,6 +14,8 @@ function plugin_init_vehicule() {
 
    $PLUGIN_HOOKS['menu_toadd']['vehicule'] = array('assets' => 'PluginVehiculeVehicule');
 
+   $CFG_GLPI["contract_types"][] = "PluginVehiculeVehicule";
+
 }
 
 

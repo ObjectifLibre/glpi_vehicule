@@ -2,6 +2,8 @@
 
 class PluginVehiculeVehicule extends CommonDBTM {
 
+   public $dohistory = TRUE;
+
    // Should return the localized name of the type
    static function getTypeName($nb = 0) {
       return 'Vehicule';
@@ -14,123 +16,68 @@ class PluginVehiculeVehicule extends CommonDBTM {
    static function canCreate() {
       return true;
    }
+   static function canUpdate() {
+      return true;
+   }
 
 
    static function canView() {
       return true;
    }
 
+   function defineTabs($options=array()){
+
+      $ong = array();
+      $this->addDefaultFormTab($ong);
+      $this->addStandardTab('Contract_Item', $ong, $options);
+      $this->addStandardTab('Log', $ong, $options);
+
+      return $ong;
+   }
+
+
+// pour ajouter des colones par défaut à l'install :
+// voir install/mysql/plugin_fusioninventory-empty.sql
    
    function getSearchOptions() {
 
       $tab = array();
-      $tab['common'] = "Header Needed";
+      $tab['common'] = "Vehicule";
 
-      $tab[1]['table']     = 'glpi_plugin_example_examples';
+      $tab[1]['table']     = $this->getTable();
       $tab[1]['field']     = 'name';
       $tab[1]['name']      = __('Name');
+      $tab[1]['datatype']  = 'itemlink';
 
-      $tab[2]['table']     = 'glpi_plugin_example_dropdowns';
-      $tab[2]['field']     = 'name';
-      $tab[2]['name']      = __('Dropdown');
-
-      $tab[3]['table']     = 'glpi_plugin_example_examples';
-      $tab[3]['field']     = 'serial';
-      $tab[3]['name']      = __('Serial number');
-      $tab[3]['usehaving'] = true;
-      $tab[3]['searchtype'] = 'equals';
-
-      $tab[30]['table']     = 'glpi_plugin_example_examples';
-      $tab[30]['field']     = 'id';
-      $tab[30]['name']      = __('ID');
+      $tab[2]['table']     = $this->getTable();
+      $tab[2]['field']     = 'serial';
+      $tab[2]['name']      = __('Serial number');
 
       return $tab;
    }
 
-   function getTabNameForItem(CommonGLPI $item, $withtemplate=0) {
 
-      if (!$withtemplate) {
-         switch ($item->getType()) {
-            case 'Profile' :
-               if ($item->getField('central')) {
-                  return __('Example', 'example');
-               }
-               break;
+   function showForm($id, $options=array()) {
 
-            case 'Phone' :
-               if ($_SESSION['glpishow_count_on_tabs']) {
-                  return self::createTabEntry(__('Example', 'example'),
-                                              countElementsInTable($this->getTable()));
-               }
-               return __('Example', 'example');
+      $this->initForm($id, $options);
+      $this->showFormHeader($options);
 
-            case 'ComputerDisk' :
-            case 'Supplier' :
-               return array(1 => __("Test PLugin", 'example'),
-                            2 => __("Test PLugin 2", 'example'));
+      echo "<tr class='tab_bg_1'>";
+      echo "<td>".__('Name')." :</td>";
+      echo "<td align='center'>";
+      echo Html::input("name", array("value"=>$this->fields["name"]) );
+      echo "</td>";
+      echo "<td>".__('Serial number')."&nbsp;:</td>";
+      echo "<td align='center'>";
+      echo Html::input("serial", array("value"=>$this->fields["serial"]) );
+      echo "</td>";
+      echo "</tr>";
 
-            case 'Computer' :
-            case 'Central' :
-            case 'Preference':
-            case 'Notification':
-               return array(1 => __("Test PLugin", 'example'));
 
-         }
-      }
-      return '';
+      $this->showFormButtons($options);
+
+      return TRUE;
    }
-
-   static function displayTabContentForItem(CommonGLPI $item, $tabnum=1, $withtemplate=0) {
-
-      switch ($item->getType()) {
-         case 'Phone' :
-            _e("Plugin Example on Phone", 'example');
-            break;
-
-         case 'Central' :
-            _e("Plugin central action", 'example');
-            break;
-
-         case 'Preference' :
-            // Complete form display
-            $data = plugin_version_example();
-
-            echo "<form action='Where to post form'>";
-            echo "<table class='tab_cadre_fixe'>";
-            echo "<tr><th colspan='3'>".$data['name']." - ".$data['version'];
-            echo "</th></tr>";
-
-            echo "<tr class='tab_bg_1'><td>Name of the pref</td>";
-            echo "<td>Input to set the pref</td>";
-
-            echo "<td><input class='submit' type='submit' name='submit' value='submit'></td>";
-            echo "</tr>";
-
-            echo "</table>";
-            echo "</form>";
-            break;
-
-         case 'Notification' :
-            _e("Plugin mailing action", 'example');
-            break;
-
-         case 'ComputerDisk' :
-         case 'Supplier' :
-            if ($tabnum==1) {
-               _e('First tab of Plugin example', 'example');
-            } else {
-               _e('Second tab of Plugin example', 'example');
-            }
-            break;
-
-         default :
-            //TRANS: %1$s is a class name, %2$d is an item ID
-            printf(__('Plugin example CLASS=%1$s id=%2$d', 'example'), $item->getType(), $item->getField('id'));
-            break;
-      }
-      return true;
-   }
-
 
 }
 

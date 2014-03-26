@@ -6,6 +6,8 @@ function plugin_vehicule_install() {
    if (!TableExists("glpi_plugin_vehicule_vehicules")) {
             $query = "CREATE TABLE `glpi_plugin_vehicule_vehicules` (
                   `id` int(11) NOT NULL auto_increment,
+                  `entities_id` int(11) NOT NULL DEFAULT '0',
+                  `is_recursive` tinyint(1) NOT NULL DEFAULT '1',
                   `name` varchar(255) collate utf8_unicode_ci default NULL,
                   `serial` varchar(255) collate utf8_unicode_ci NOT NULL,
                 PRIMARY KEY (`id`)
