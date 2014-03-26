@@ -62,7 +62,7 @@ if (isset($_POST["add"])) {
    Html::back();
 
 } else {//print vehicule information
-   Html::header(Computer::GetTypeName(2), $_SERVER['PHP_SELF'], "assets", "vehicule");
+   Html::header(Computer::GetTypeName(2), $_SERVER['PHP_SELF'], "assets", "pluginvehiculevehicule", "vehicule");
    //show vehicule form to add
    $vehicule->display(array('id'           => $_GET["id"]));
    Html::footer();
