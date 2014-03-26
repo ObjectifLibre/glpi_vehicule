@@ -20,19 +20,7 @@ class PluginVehiculeVehicule extends CommonDBTM {
       return true;
    }
 
-   static function getAdditionalMenuOptions() {
-      return array("vehicule"=> array(
-              'title' => PluginVehiculeVehicule::getTypeName(),
-              'page'  => PluginVehiculeVehicule::getSearchURL(false),
-              'links' => array(
-                  'search' => '/plugins/vehicule/front/vehicule.php',
-                  'add'    => '/plugins/vehicule/front/vehicule.form.php'
-              )
-	)
-	);
-
-   }
-
+   
    function getSearchOptions() {
 
       $tab = array();
